@@ -7,6 +7,9 @@ import { environment } from '../environments/environment';
 
 import { ApiService } from './services/api.service';
 
+import { questionsReducer } from './state/questions.reducer';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LeaderboardComponent } from './views/leaderboard/leaderboard.component';
@@ -25,9 +28,7 @@ import { HeaderComponent } from './components/header/header.component';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        StoreModule.forRoot({}, {}),
-        EffectsModule.forRoot([]),
-        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+        StoreModule.forRoot({ questions: questionsReducer }, {}),
     ],
     providers: [
         ApiService
