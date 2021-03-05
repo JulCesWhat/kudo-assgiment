@@ -1,15 +1,16 @@
 import { createAction, props } from '@ngrx/store';
-import { Question } from '../modals/question.model';
+import { Question } from '../data.models/question.model';
+
 
 export const addQuestion = createAction(
     '[Questions Object] Add Question',
-    props<{ questionId: string, question: Question }>()
+    props<{ question: Question }>()
 );
 
-// export const removeBook = createAction(
-//     '[Book Collection] Remove Book',
-//     props<{ bookId }>()
-// );
+export const addQuestionAnswer = createAction(
+    '[Questions Object] Add Question Answer',
+    props<{ questionId: string, userId: string, answerOption: string }>()
+)
 
 export const retrievedQuestionList = createAction(
     '[Questions Object/API] Retrieve Questions Success',

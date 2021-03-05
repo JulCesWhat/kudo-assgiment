@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { promise } from 'protractor';
+import { Question } from '../data.models/question.model';
 
 
 @Injectable({
@@ -141,7 +143,7 @@ export class ApiService {
         });
     }
 
-    private formatQuestion(question: any) {
+    private formatQuestion(question: any): Question {
         const { author, optionOneText, optionTwoText } = question;
         return {
             id: this.generateUid(),
@@ -158,7 +160,7 @@ export class ApiService {
         };
     }
 
-    private _saveQuestion(question: any) {
+    private _saveQuestion(question: any): Promise<Question> {
         return new Promise((res, rej) => {
             const { author: authedUser } = question;
             const formattedQuestion = this.formatQuestion(question);
@@ -227,7 +229,7 @@ export class ApiService {
         }));
     }
 
-    public saveQuestion(question: any) {
+    public saveQuestion(question: any): Promise<Question> {
         return this._saveQuestion(question);
     }
 

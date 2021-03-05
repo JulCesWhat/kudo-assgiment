@@ -1,1 +1,21 @@
-<p>dashboard works!</p>
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div class="row justify-content-center">
+            <div class="col-3" (click)="toggle(true)">
+                <span>Answered Questions</span>
+            </div>
+            <div class="col-3" (click)="toggle(false)">
+                <span>Unanswered Questions</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-6" *ngIf="showAnswered">
+        <app-question-list [questions]="answeredQuestion$ | async" (onClicked)="onClicked($event)">
+        </app-question-list>
+    </div>
+    <div class="col-6" *ngIf="!showAnswered">
+        <app-question-list [questions]="unansweredQuestion$ | async" (onClicked)="onClicked($event)">
+        </app-question-list>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <h3>Create New Question</h3>
+        <h5>Would you rather?</h5>
+    </div>
+    <div class="col-12">
+        <form [formGroup]="newQuestionForm" autocomplete="off" novalidate>
+            <input formControlName="q1" id="q1">
+            <p>Or</p>
+            <input formControlName="q2" id="q2">
+        </form>
+    </div>
+    <div class="col-3">
+        <button type="button" class="btn btn-primary" (click)="addNewQuestion()" [disabled]="!newQuestionForm.valid">Primary</button>
+    </div>
+</div>

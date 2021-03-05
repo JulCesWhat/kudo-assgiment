@@ -1,0 +1,7 @@
+<div class="row">
+    <div class="col-12">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let question of questions" (click)="questionClicked(question.id)">{{question.author}}</li>
+        </ul>
+    </div>
+</div>

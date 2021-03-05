@@ -1,1 +1,14 @@
-<p>leaderboard works!</p>
+<div class="row justify-content-center">
+    <div class="col-12">
+        <h3>Leaderboard</h3>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <ng-container *ngFor="let user of users$ | async">
+                <div class="col-7">
+                    <app-user-details [user]="user"></app-user-details>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

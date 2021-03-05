@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-12" *ngIf="question; else not_found">
+        <ng-container *ngIf="!!userResponse; else not_answered">
+            <h3>Results</h3>
+            <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
+            <div [ngClass]="userResponse === 'optionOne' ? 'question-answer' : '' ">
+                <p>{{question?.optionOne?.text}}</p>
+                <p>{{(question.optionOne.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</p>
+                <p>{{question.optionOne.votes.length}} out of {{totalVotes}}</p>
+            </div>
+            <hr />
+            <div [ngClass]="userResponse === 'optionTwo' ? 'question-answer' : '' ">
+                <p>{{question.optionTwo.text}}</p>
+                <p>{{(question.optionTwo.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</p>
+                <p>{{question.optionTwo.votes.length}} out of {{totalVotes}}</p>
+            </div>
+        </ng-container>
+        <ng-template #not_answered>
+            <h3>Would you rather?</h3>
+            <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
+            <div>
+                <button className="btn" (click)="onClick('optionOne')">{{question?.optionOne?.text}}</button>
+            </div>
+            <div>
+                <button className="btn" (click)="onClick('optionTwo')">{{question?.optionTwo?.text}}</button>
+            </div>
+        </ng-template>
+    </div>
+    <ng-template #not_found>
+        <div class="col-12">
+            <h2>Question with id={{questionIdFromRoute}} cannot be found.</h2>
+        </div>
+    </ng-template>
+</div>
