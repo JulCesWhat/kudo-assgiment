@@ -1,5 +1,5 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { setAuthedUser } from './authedUser.actions';
+import { setAuthedUser } from '../actions/authedUser.actions';
 
 
 export const initialState: string = '';

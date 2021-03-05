@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { selectSortedUsers } from '../../state/users.selectors';
+import { selectSortedUsers } from '../../state/selectors/users.selectors';
 import { AppState } from '../../state/app.state'
 import { Store, select } from '@ngrx/store';
 

@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { User } from '../data.models/user.model';
-import { retrievedUserList, addUserQuestion, addUserQuestionAnswer } from './users.actions';
+import { User } from '../../data.models/user.model';
+import { retrievedUserList, addUserQuestion, addUserQuestionAnswer } from '../actions/users.actions';
 
 
 export const initialState: { [key: string]: User } = {};

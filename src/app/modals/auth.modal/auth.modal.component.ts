@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppState } from '../../state/app.state';
-import { selectUsers } from '../../state/users.selectors';
+import { selectUsers } from '../../state/selectors/users.selectors';
 import { Store, select } from '@ngrx/store';
 import { User } from 'src/app/data.models/user.model';
-import { setAuthedUser } from '../../state/authedUser.actions';
+import { setAuthedUser } from '../../state/actions/authedUser.actions';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

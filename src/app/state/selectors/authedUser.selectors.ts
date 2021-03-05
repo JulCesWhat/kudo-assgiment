@@ -1,9 +1,9 @@
 import { createSelector, createFeatureSelector } from "@ngrx/store";
-import { AppState } from "./app.state";
+import { AppState } from "../app.state";
 import { selectUsers } from './users.selectors';
 import { selectQuestions, selectQuestionById } from './questions.selectors';
-import { User } from '../data.models/user.model';
-import { Question } from "../data.models/question.model";
+import { User } from '../../data.models/user.model';
+import { Question } from "../../data.models/question.model";
 
 
 export const selectAuthedUser = createSelector(

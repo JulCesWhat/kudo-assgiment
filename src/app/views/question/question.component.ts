@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../../state/app.state';
 import { Store, select } from '@ngrx/store';
-import { selectQuestions, selectQuestionById } from '../../state/questions.selectors';
+import { selectQuestions, selectQuestionById } from '../../state/selectors/questions.selectors';
 import { Question } from 'src/app/data.models/question.model';
-import { selectAuthedUser, } from 'src/app/state/authedUser.selectors';
-import { selectUserByQuestionId } from '../../state/users.selectors';
+import { selectAuthedUser, } from 'src/app/state/selectors/authedUser.selectors';
+import { selectUserByQuestionId } from '../../state/selectors/users.selectors';
 import { ApiService } from '../../services/api.service';
-import { addQuestionAnswer } from '../../state/questions.actions';
-import { addUserQuestionAnswer } from '../../state/users.actions';
+import { addQuestionAnswer } from '../../state/actions/questions.actions';
+import { addUserQuestionAnswer } from '../../state/actions/users.actions';
 
 @Component({
     selector: 'app-question',

@@ -1,6 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import { addQuestion, addQuestionAnswer, retrievedQuestionList } from './questions.actions';
-import { Question } from '../data.models/question.model';
+import { addQuestion, addQuestionAnswer, retrievedQuestionList } from '../actions/questions.actions';
+import { Question } from '../../data.models/question.model';
 
 
 export const initialState: { [key: string]: Question } = {};

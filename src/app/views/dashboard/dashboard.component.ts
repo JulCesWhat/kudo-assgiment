@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AppState } from '../../state/app.state';
 import { Store, select } from '@ngrx/store';
-import { selectQuestions } from '../../state/questions.selectors';
-import { Question } from 'src/app/data.models/question.model';
-import { selectAnsweredQuestion, selectUnansweredQuestion } from '../../state/authedUser.selectors';
+import { selectAnsweredQuestion, selectUnansweredQuestion } from '../../state/selectors/authedUser.selectors';
 
 @Component({
     selector: 'app-dashboard',

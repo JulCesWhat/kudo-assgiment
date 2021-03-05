@@ -7,9 +7,9 @@ import { environment } from '../environments/environment';
 
 import { ApiService } from './services/api.service';
 
-import { questionsReducer } from './state/questions.reducer';
-import { usersReducer } from './state/users.reducer';
-import { authedUserReducer } from './state/authedUser.reducer'
+import { questionsReducer } from './state/reducers/questions.reducer';
+import { usersReducer } from './state/reducers/users.reducer';
+import { authedUserReducer } from './state/reducers/authedUser.reducer'
 
 
 import { AppRoutingModule } from './app-routing.module';

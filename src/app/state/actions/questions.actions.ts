@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Question } from '../data.models/question.model';
+import { Question } from '../../data.models/question.model';
 
 
 export const addQuestion = createAction(

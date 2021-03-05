@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AppState } from '../../state/app.state';
-import { selectAuthedUser } from '../../state/authedUser.selectors';
+import { selectAuthedUser } from '../../state/selectors/authedUser.selectors';
 import { Store, select } from '@ngrx/store';
-import { setAuthedUser } from 'src/app/state/users.actions';
+import { setAuthedUser } from 'src/app/state/actions/users.actions';
 import { User } from 'src/app/data.models/user.model';
 
 @Component({

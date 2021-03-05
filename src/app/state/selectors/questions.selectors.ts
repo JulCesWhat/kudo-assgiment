@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from "@ngrx/store";
-import { AppState } from "./app.state";
-import { Question } from '../data.models/question.model';
+import { AppState } from '../app.state';
+import { Question } from '../../data.models/question.model';
 
 export const selectQuestions = createSelector(
     (state: AppState) => state.questions,
