@@ -1,0 +1,13 @@
+.img-section {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    height: 100px;
+    border-radius: 10px;
+}
+
+.body-section div {
+    font-size: 14px;
+}

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/data.models/user.model';
 
 @Component({
     selector: 'app-user-details',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-    @Input() user: any;
+    @Input() user: User | null = null;
     public answeredQuestions: number = 0;
     public questions: number = 0;
     public totalScore: number = 0;
@@ -15,8 +16,8 @@ export class UserDetailsComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        this.answeredQuestions = Object.keys(this.user?.answers).length;
-        this.questions = this.user.questions.length;
+        this.answeredQuestions = this.user ? Object.keys(this.user?.answers).length : 0;
+        this.questions = this.user ? this.user.questions.length : 0;
         this.totalScore = this.answeredQuestions + this.questions;
     }
 

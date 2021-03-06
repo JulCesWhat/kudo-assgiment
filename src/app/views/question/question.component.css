@@ -1,0 +1,12 @@
+.main {
+    text-align: center;
+}
+
+img {
+    border-radius: 10px;
+}
+
+.question-answer {
+    border: 1px solid black;
+    border-radius: 10px;
+}

@@ -4,18 +4,18 @@
             <li class="list-group-item" *ngFor="let question of questions" (click)="questionClicked(question.id)">
                 <ng-container *ngIf="users">
                     <div class="row">
-                        <div class="col-1">
+                        <div class="col-2 img-section">
                             <img [src]="users[question.author]?.avatarURL" alt="Avatart of {{users[question.author].name}}"
                             className="avatar" />
                         </div>
-                        <div class="col-9">
-                            <div>{{users[question.author].name}}</div>
+                        <div class="col-8">
+                            <h5>{{users[question.author].name}}</h5>
+                            <p>Would you rather...</p>
                         </div>
                         <div class="col-2">
                             <div>{{question.timestamp | date}}</div>
                         </div>
                     </div>
-                    <p>Would you rather...</p>
                 </ng-container>
             </li>
         </ul>

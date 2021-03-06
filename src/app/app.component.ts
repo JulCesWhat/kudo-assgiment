@@ -52,7 +52,8 @@ export class AppComponent {
     private openAuthenticationModal() {
         const modalRef = this.modalService.open(AuthModalComponent, {
             backdrop: 'static',
-            centered: true
+            centered: false,
+            size: 'md'
         });
         modalRef.result
             .then(() => {

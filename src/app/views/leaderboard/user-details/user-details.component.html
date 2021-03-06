@@ -1,7 +1,15 @@
 <div class="row">
     <div class="col-12">
-        <p>Answered Questions: {{answeredQuestions}}</p>
-        <p>Created Questions: {{questions}}</p>
-        <p>Score: {{totalScore}}</p>
+        <div class="row">
+            <div class="col-2 img-section">
+                <img [src]="user?.avatarURL" alt="Avatart of {{user?.name}}" className="avatar" />
+            </div>
+            <div class="col-10 body-section">
+                <h5>{{user?.name}}</h5>
+                <div>Answered Questions: {{answeredQuestions}}</div>
+                <div>Created Questions: {{questions}}</div>
+                <div>Score: {{totalScore}}</div>
+            </div>
+        </div>
     </div>
 </div>

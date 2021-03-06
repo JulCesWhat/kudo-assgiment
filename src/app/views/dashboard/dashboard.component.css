@@ -4,6 +4,7 @@
 
 h4 {
     cursor: pointer;
+    padding-bottom: 10px;
 }
 
 .selected h4 {

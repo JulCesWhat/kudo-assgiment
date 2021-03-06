@@ -59,6 +59,7 @@ export class QuestionComponent implements OnInit {
                 console.log(authedUser)
                 this.authedUser = authedUser;
                 this.userResponse = authedUser?.answers[this.questionIdFromRoute] ? authedUser?.answers[this.questionIdFromRoute] : '';
+                console.log(this.userResponse);
             });
 
         this.store.select(selectUserByQuestionId(this.questionIdFromRoute))

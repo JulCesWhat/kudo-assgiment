@@ -1,34 +1,55 @@
-<div class="row">
-    <div class="col-12" *ngIf="question; else not_found">
+<div class="row main justify-content-center">
+    <ng-container *ngIf="question; else not_found">
         <ng-container *ngIf="!!userResponse; else not_answered">
-            <h3>Results</h3>
-            <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
-            <div [ngClass]="userResponse === 'optionOne' ? 'question-answer' : '' ">
-                <p>{{question?.optionOne?.text}}</p>
-                <p>{{(question.optionOne.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</p>
-                <p>{{question.optionOne.votes.length}} out of {{totalVotes}}</p>
+            <div class="col-12">
+                <h3>Results</h3>
             </div>
-            <hr />
-            <div [ngClass]="userResponse === 'optionTwo' ? 'question-answer' : '' ">
-                <p>{{question.optionTwo.text}}</p>
-                <p>{{(question.optionTwo.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</p>
-                <p>{{question.optionTwo.votes.length}} out of {{totalVotes}}</p>
+            <div class="col-12 mt-3">
+                <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
+            </div>
+            <div class="col-12 mt-3">
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <div class="answer-section py-2" [ngClass]="userResponse === 'optionOne' ? 'question-answer' : '' ">
+                            <h5>{{question?.optionOne?.text}}</h5>
+                            <div>{{(question.optionOne.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</div>
+                            <div>{{question.optionOne.votes.length}} out of {{totalVotes}}</div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="answer-section py-2" [ngClass]="userResponse === 'optionTwo' ? 'question-answer' : '' ">
+                            <h5>{{question.optionTwo.text}}</h5>
+                            <div>{{(question.optionTwo.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</div>
+                            <div>{{question.optionTwo.votes.length}} out of {{totalVotes}}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </ng-container>
         <ng-template #not_answered>
-            <h3>Would you rather?</h3>
-            <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
-            <div>
-                <button className="btn" (click)="onClick('optionOne')">{{question?.optionOne?.text}}</button>
+            <div class="col-12">
+                <h3>Would you rather?</h3>
             </div>
-            <div>
-                <button className="btn" (click)="onClick('optionTwo')">{{question?.optionTwo?.text}}</button>
+            <div class="col-12 mt-3">
+                <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
+            </div>
+            <div class="col-6 mt-3">
+                <div class="row justify-content-center">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary"
+                            (click)="onClick('optionOne')">{{question?.optionOne?.text}}</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-primary"
+                            (click)="onClick('optionTwo')">{{question?.optionTwo?.text}}</button>
+                    </div>
+                </div>
             </div>
         </ng-template>
-    </div>
+    </ng-container>
     <ng-template #not_found>
         <div class="col-12">
-            <h2>Question with id={{questionIdFromRoute}} cannot be found.</h2>
+            <h3>Question with id={{questionIdFromRoute}} cannot be found.</h3>
         </div>
     </ng-template>
 </div>
