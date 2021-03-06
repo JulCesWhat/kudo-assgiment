@@ -1,17 +1,25 @@
-<ul class="nav justify-content-end" *ngIf="authedUser">
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="goToHome()">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="goToLeaderboard()">Leaderboard</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="goToAddQuestion()">Add Question</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="javascript:void(0)" (click)="logout()">Logout</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="javascript:void(0)">{{authedUser.name}}</a>
-    </li>
-</ul>
+<div class="row justify-content-between">
+    <div class="col-4">
+        <ul class="nav justify-content-start mb-5" *ngIf="authedUser">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="goToHome()">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="goToLeaderboard()">Leaderboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="goToAddQuestion()">Add Question</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-4">
+        <ul class="nav justify-content-end mb-5" *ngIf="authedUser">
+            <li class="nav-item">
+                <a class="nav-link disabled" href="javascript:void(0)">Hello {{authedUser.name}}!</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)" (click)="logout()">Logout</a>
+            </li>
+        </ul>
+    </div>
+</div>

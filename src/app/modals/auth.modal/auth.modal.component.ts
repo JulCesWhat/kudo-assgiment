@@ -15,6 +15,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AuthModalComponent implements OnInit {
 
     public allUsers: { [key: string]: User } = {};
+    public userIds: string [] = [];
 
     public loginForm: FormGroup = new FormGroup({
         username: new FormControl('', [
@@ -28,7 +29,10 @@ export class AuthModalComponent implements OnInit {
     ) {
         this.store.select(selectUsers)
             .subscribe((users) => {
-                this.allUsers = users;
+                if (users) {
+                    this.allUsers = users;
+                    this.userIds = Object.keys(this.allUsers).map((id) => (id));
+                }
             });
     }
 

@@ -1,16 +1,24 @@
 <div class="modal-container">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+        <h4 class="modal-title" id="modal-basic-title">Hi there! Please select the user to login with.</h4>
     </div>
     <div class="modal-body row justify-content-center">
-        <div class="col-12">
-            <form [formGroup]="loginForm" autocomplete="off" novalidate>
-                <input formControlName="username" id="username">
-                <!-- <input formControlName="password" id="password"> -->
-            </form>
-        </div>
-        <div class="col-3">
-            <button type="button" class="btn btn-primary" (click)="login()" [disabled]="!loginForm.valid">Primary</button>
-        </div>
+        <ng-container *ngIf="userIds.length; else getting_details">
+            <div class="col-9">
+                <form [formGroup]="loginForm" autocomplete="off" novalidate>
+                    <select class="form-select" aria-label="Default select example" formControlName="username">
+                        <option *ngFor="let id of userIds" [value]="id">{{allUsers[id].name}}</option>
+                      </select>
+                </form>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary" [disabled]="!loginForm.valid" (click)="login()">Login</button>
+            </div>
+        </ng-container>
+        <ng-template #getting_details>
+            <div class="col-2">
+                <div class="loader"></div>
+            </div>
+        </ng-template>
     </div>
 </div>

@@ -18,7 +18,6 @@ import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
 export class AppComponent {
     title = 'kudo-assgiment';
     authedUserId: string = '';
-    // authModalOpened: boolean = false;
 
     constructor(
         private apiService: ApiService,
@@ -36,11 +35,15 @@ export class AppComponent {
             }).catch((apiError) => {
 
             });
+
         this.store.select(selectAuthedUser)
             .subscribe((authedUser) => {
                 console.log('selectAuthedUser')
                 console.log(authedUser)
-                if (!authedUser) {
+                if (authedUser) {
+                    this.authedUserId = authedUser.id;
+                } else {
+                    this.authedUserId = '';
                     this.openAuthenticationModal();
                 }
             });
