@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from './services/api.service';
 import { Store, select } from '@ngrx/store';
 import { retrievedQuestionList } from './state/actions/questions.actions';
@@ -9,15 +9,17 @@ import { selectAuthedUser } from './state/selectors/authedUser.selectors';
 import { AppState } from './state/app.state';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
     title = 'kudo-assgiment';
     authedUserId: string = '';
+    authedUserSubscription: Subscription | null = null;
 
     constructor(
         private apiService: ApiService,
@@ -36,10 +38,8 @@ export class AppComponent {
 
             });
 
-        this.store.select(selectAuthedUser)
+        this.authedUserSubscription = this.store.select(selectAuthedUser)
             .subscribe((authedUser) => {
-                console.log('selectAuthedUser')
-                console.log(authedUser)
                 if (authedUser) {
                     this.authedUserId = authedUser.id;
                 } else {
@@ -47,6 +47,10 @@ export class AppComponent {
                     this.openAuthenticationModal();
                 }
             });
+    }
+
+    ngOnDestroy(): void {
+        this.authedUserSubscription?.unsubscribe();
     }
 
     private openAuthenticationModal() {
@@ -61,5 +65,4 @@ export class AppComponent {
             .catch(() => {/* Do Nothing*/
             });
     }
-
 }

@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { AppState } from '../../state/app.state';
 import { selectAuthedUser } from '../../state/selectors/authedUser.selectors';
 import { Store, select } from '@ngrx/store';
 import { setAuthedUser } from 'src/app/state/actions/users.actions';
 import { User } from 'src/app/data.models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
     public authedUser: User | null = null;
+    authedUserSubscription: Subscription | null = null;
 
     constructor(
         private store: Store<AppState>,
@@ -21,10 +23,14 @@ export class HeaderComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.store.select(selectAuthedUser)
+        this.authedUserSubscription = this.store.select(selectAuthedUser)
             .subscribe((authedUser) => {
                 this.authedUser = authedUser;
             });
+    }
+
+    ngOnDestroy(): void {
+        this.authedUserSubscription?.unsubscribe();
     }
 
     public goToHome() {

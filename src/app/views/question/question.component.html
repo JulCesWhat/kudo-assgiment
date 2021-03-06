@@ -5,13 +5,13 @@
                 <h3>Results</h3>
             </div>
             <div class="col-12 mt-3">
-                <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
+                <img [src]="userCreator?.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
             </div>
             <div class="col-12 mt-3">
                 <div class="row justify-content-center">
                     <div class="col-3">
                         <div class="answer-section py-2" [ngClass]="userResponse === 'optionOne' ? 'question-answer' : '' ">
-                            <h5>{{question?.optionOne?.text}}</h5>
+                            <h5>{{question.optionOne.text}}</h5>
                             <div>{{(question.optionOne.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</div>
                             <div>{{question.optionOne.votes.length}} out of {{totalVotes}}</div>
                         </div>
@@ -31,7 +31,7 @@
                 <h3>Would you rather?</h3>
             </div>
             <div class="col-12 mt-3">
-                <img [src]="userCreator.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
+                <img [src]="userCreator?.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
             </div>
             <div class="col-6 mt-3">
                 <div class="row justify-content-center">

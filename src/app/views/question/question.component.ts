@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../../state/app.state';
 import { Store, select } from '@ngrx/store';
@@ -9,13 +9,14 @@ import { selectUserByQuestionId } from '../../state/selectors/users.selectors';
 import { ApiService } from '../../services/api.service';
 import { addQuestionAnswer } from '../../state/actions/questions.actions';
 import { addUserQuestionAnswer } from '../../state/actions/users.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-question',
     templateUrl: './question.component.html',
     styleUrls: ['./question.component.css']
 })
-export class QuestionComponent implements OnInit {
+export class QuestionComponent implements OnInit, OnDestroy {
 
     public question: Question | null = null;
     public answeredQuestion: boolean = false;
@@ -24,6 +25,9 @@ export class QuestionComponent implements OnInit {
     public userCreator: any = null;
     public userResponse: string = '';
     public totalVotes: number = 0;
+    public selectQuestionByIdSubscription: Subscription | null = null;
+    public selectAuthedUserSubscription: Subscription | null = null;
+    public selectUserByQuestionIdSubscription: Subscription | null = null;
 
     constructor(
         private route: ActivatedRoute,
@@ -35,38 +39,32 @@ export class QuestionComponent implements OnInit {
         const routeParams = this.route.snapshot.paramMap;
         this.questionIdFromRoute = routeParams.get('questionId') || '';
 
-        console.log(this.questionIdFromRoute);
         if (this.questionIdFromRoute) {
+            this.selectQuestionByIdSubscription = this.store.select(selectQuestionById(this.questionIdFromRoute))
+                .subscribe((question) => {
+                    if (question) {
+                        this.question = question;
+                        this.totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length
+                    }
+                });
 
-        } else {
+            this.selectAuthedUserSubscription = this.store.select(selectAuthedUser)
+                .subscribe((authedUser) => {
+                    this.authedUser = authedUser;
+                    this.userResponse = authedUser?.answers[this.questionIdFromRoute] ? authedUser?.answers[this.questionIdFromRoute] : '';
+                });
 
+            this.selectUserByQuestionIdSubscription = this.store.select(selectUserByQuestionId(this.questionIdFromRoute))
+                .subscribe((user) => {
+                    this.userCreator = user;
+                });
         }
+    }
 
-        // Find the product that correspond with the id provided in route.
-        // this.product = products.find(product => product.id === productIdFromRoute);
-
-        this.store.select(selectQuestionById(this.questionIdFromRoute))
-            .subscribe((question) => {
-                if (question) {
-                    this.question = question;
-                    this.totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length
-                }
-            });
-
-        this.store.select(selectAuthedUser)
-            .subscribe((authedUser) => {
-                console.log('selectAuthedUser')
-                console.log(authedUser)
-                this.authedUser = authedUser;
-                this.userResponse = authedUser?.answers[this.questionIdFromRoute] ? authedUser?.answers[this.questionIdFromRoute] : '';
-                console.log(this.userResponse);
-            });
-
-        this.store.select(selectUserByQuestionId(this.questionIdFromRoute))
-            .subscribe((user) => {
-                this.userCreator = user;
-            });
-
+    ngOnDestroy(): void {
+        this.selectQuestionByIdSubscription?.unsubscribe();
+        this.selectAuthedUserSubscription?.unsubscribe();
+        this.selectUserByQuestionIdSubscription?.unsubscribe();
     }
 
     public onClick(option: string) {

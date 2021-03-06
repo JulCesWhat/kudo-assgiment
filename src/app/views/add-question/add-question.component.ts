@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { AppState } from '../../state/app.state';
@@ -8,15 +8,18 @@ import { selectAuthedUser } from 'src/app/state/selectors/authedUser.selectors';
 import { addQuestion } from 'src/app/state/actions/questions.actions';
 import { Question } from 'src/app/data.models/question.model';
 import { User } from 'src/app/data.models/user.model';
+import { addUserQuestion } from 'src/app/state/actions/users.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-add-question',
     templateUrl: './add-question.component.html',
     styleUrls: ['./add-question.component.css']
 })
-export class AddQuestionComponent implements OnInit {
+export class AddQuestionComponent implements OnInit, OnDestroy {
 
     public authedUser: User | null = null;
+    authedUserSubscription: Subscription | null = null;
 
     public newQuestionForm: FormGroup = new FormGroup({
         q1: new FormControl('', [
@@ -34,12 +37,14 @@ export class AddQuestionComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.store.select(selectAuthedUser)
+        this.authedUserSubscription = this.store.select(selectAuthedUser)
             .subscribe((authedUser) => {
-                console.log('selectAuthedUser')
-                console.log(authedUser)
                 this.authedUser = authedUser;
             });
+    }
+
+    ngOnDestroy(): void {
+        this.authedUserSubscription?.unsubscribe();
     }
 
     public addNewQuestion() {
@@ -51,6 +56,10 @@ export class AddQuestionComponent implements OnInit {
         this.apiService.saveQuestion(body)
             .then((question: Question) => {
                 this.store.dispatch(addQuestion({ question }));
+                this.store.dispatch(addUserQuestion({
+                    userId: this.authedUser?.id || '',
+                    questionId: question?.id
+                }));
                 this.router.navigate(['/home']);
             }).catch((apiError) => {
 
