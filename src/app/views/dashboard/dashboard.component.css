@@ -1,0 +1,11 @@
+.title-section {
+    text-align: center;
+}
+
+h4 {
+    cursor: pointer;
+}
+
+.selected h4 {
+    border-bottom: 2px solid black;
+}

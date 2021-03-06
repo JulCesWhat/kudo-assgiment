@@ -12,7 +12,7 @@ export class ApiService {
         rashmi: {
             id: "rashmi",
             name: "Rashmi Manandhar",
-            avatarURL: "",
+            avatarURL: "https://placekitten.com/200/302",
             answers: {
                 "8xf0y6ziyjabvozdd253nd": "optionOne",
                 "6ni6ok3ym7mf1p33lnez": "optionTwo",
@@ -24,7 +24,7 @@ export class ApiService {
         julian: {
             id: "julian",
             name: "Julian Manandhar",
-            avatarURL: "",
+            avatarURL: "https://placekitten.com/200/301",
             answers: {
                 "vthrdm985a262al8qx3do": "optionOne",
                 "xj352vofupe1dqz9emx13r": "optionTwo"
@@ -34,7 +34,7 @@ export class ApiService {
         johndoe: {
             id: "johndoe",
             name: "John Doe",
-            avatarURL: "",
+            avatarURL: "https://placekitten.com/200/300",
             answers: {
                 "xj352vofupe1dqz9emx13r": "optionOne",
                 "vthrdm985a262al8qx3do": "optionTwo",
