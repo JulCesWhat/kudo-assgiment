@@ -13,4 +13,8 @@ export const resetAuthedUser = createAction(
 export const redirect = createAction(
     '[Reroute] Reroute',
     props<{ route: string }>()
-)
+);
+
+export const getInitialData = createAction(
+    '[Users and Questions] Setting Initial Users and Questions',
+);

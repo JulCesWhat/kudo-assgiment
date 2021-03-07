@@ -2,15 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { AppState } from '../../state/app.state';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { selectAuthedUser } from 'src/app/state/selectors/authedUser.selectors';
-import { addQuestion, saveQuestion } from 'src/app/state/actions/questions.actions';
-import { Question } from 'src/app/data.models/question.model';
+import { saveQuestion } from 'src/app/state/actions/questions.actions';
 import { User } from 'src/app/data.models/user.model';
-import { addUserQuestion } from 'src/app/state/actions/users.actions';
 import { Subscription } from 'rxjs';
-import { selectQuestions } from 'src/app/state/selectors/questions.selectors';
 
 @Component({
     selector: 'app-add-question',
@@ -32,8 +29,6 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     });
 
     constructor(
-        private apiService: ApiService,
-        private router: Router,
         private store: Store<AppState>
     ) { }
 

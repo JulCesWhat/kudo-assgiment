@@ -4,8 +4,9 @@ import { EMPTY, from } from 'rxjs';
 import { map, mergeMap, catchError, switchMap, tap } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
 import { redirect } from '../actions/authedUser.actions';
-import { saveQuestion, addQuestion, saveQuestionAnswer, addQuestionAnswer } from '../actions/questions.actions';
-import { addUserQuestion, addUserQuestionAnswer } from '../actions/users.actions';
+import { saveQuestion, addQuestion, saveQuestionAnswer, addQuestionAnswer, retrievedQuestionList } from '../actions/questions.actions';
+import { addUserQuestion, addUserQuestionAnswer, retrievedUserList } from '../actions/users.actions';
+import { getInitialData } from '../actions/authedUser.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -35,7 +36,19 @@ export class QuestionsEffects {
                 ]),
                 catchError(() => EMPTY)
             ))
-    ))
+    ));
+
+    getInitialDataEffect$ = createEffect(() => this.actions$.pipe(
+        ofType(getInitialData),
+        mergeMap((action) => this.apiService.getInitialData()
+            .pipe(
+                switchMap(response => [
+                    retrievedQuestionList({ questions: response.questions }),
+                    retrievedUserList({ users: response.users })
+                ]),
+                catchError(() => EMPTY)
+            ))
+    ));
 
     rerouteSuccessEffect$ = createEffect(
         () =>

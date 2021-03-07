@@ -8,7 +8,6 @@ export const selectUsers = createSelector(
     (users: { [key: string]: User }) => users
 );
 
-
 export const selectUserByQuestionId = (id: string) => createSelector(
     selectUsers,
     (allUsers: { [key: string]: User }) => {

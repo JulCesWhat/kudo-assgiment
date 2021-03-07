@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
 import { from, Observable } from 'rxjs';
-import { Question, SaveQuestionAnswer } from '../data.models/question.model';
+import { AllQuestionsUsers, Question, SaveQuestionAnswer } from '../data.models/question.model';
+import { User } from '../data.models/user.model';
 
 
 @Injectable({
@@ -128,17 +129,17 @@ export class ApiService {
 
     constructor() { }
 
-    private generateUid() {
+    private generateUid(): string {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 
-    private _getUsers() {
+    private _getUsers(): Promise<{ [key: string]: User }> {
         return new Promise((res, rej) => {
             setTimeout(() => res({ ...this.users }), 1000);
         });
     }
 
-    private _getQuestions() {
+    private _getQuestions(): Promise<{ [key: string]: Question }> {
         return new Promise((res, rej) => {
             setTimeout(() => res({ ...this.questions }), 1000);
         });
@@ -232,14 +233,14 @@ export class ApiService {
 
 
 
-    public getInitialData() {
-        return Promise.all([
+    public getInitialData(): Observable<AllQuestionsUsers> {
+        return from(Promise.all([
             this._getUsers(),
             this._getQuestions(),
         ]).then(([users, questions]) => ({
             users,
             questions,
-        }));
+        })));
     }
 
     public saveQuestion(question: any): Observable<Question> {

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from "@angular/router";
 import { AppState } from '../../state/app.state';
 import { selectAuthedUser } from '../../state/selectors/authedUser.selectors';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { resetAuthedUser } from 'src/app/state/actions/authedUser.actions';
 import { User } from 'src/app/data.models/user.model';
 import { Subscription } from 'rxjs';

@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../../state/app.state';
-import { Store, select } from '@ngrx/store';
-import { selectQuestions, selectQuestionById } from '../../state/selectors/questions.selectors';
+import { Store } from '@ngrx/store';
+import { selectQuestionById } from '../../state/selectors/questions.selectors';
 import { Question } from 'src/app/data.models/question.model';
 import { selectAuthedUser, } from 'src/app/state/selectors/authedUser.selectors';
 import { selectUserByQuestionId } from '../../state/selectors/users.selectors';
 import { ApiService } from '../../services/api.service';
-import { addQuestionAnswer, saveQuestionAnswer } from '../../state/actions/questions.actions';
-import { addUserQuestionAnswer } from '../../state/actions/users.actions';
+import { saveQuestionAnswer } from '../../state/actions/questions.actions';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -31,8 +30,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
     constructor(
         private route: ActivatedRoute,
-        private store: Store<AppState>,
-        private apiService: ApiService
+        private store: Store<AppState>
     ) { }
 
     ngOnInit(): void {
