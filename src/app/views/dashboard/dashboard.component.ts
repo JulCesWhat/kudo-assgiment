@@ -12,7 +12,7 @@ import { selectUsers } from '../../state/selectors/users.selectors';
 })
 export class DashboardComponent implements OnInit {
 
-    public showAnswered: boolean = true;
+    public showUnanswered: boolean = true;
     public answeredQuestion$ = this.store.pipe(select(selectAnsweredQuestion));
     public unansweredQuestion$ = this.store.pipe(select(selectUnansweredQuestion));
     public users$ = this.store.pipe(select(selectUsers));
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     }
 
     public toggle(show: boolean) {
-        this.showAnswered = show;
+        this.showUnanswered = show;
     }
 
     public onClicked(id: string) {

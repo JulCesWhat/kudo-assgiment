@@ -2,24 +2,24 @@
 <div class="row justify-content-center">
     <div class="col-12">
         <div class="row justify-content-center title-section">
-            <div class="col-3" (click)="toggle(true)" [ngClass]="showAnswered ? 'selected' : ''">
-                <h4>Answered Questions</h4>
-            </div>
-            <div class="col-3" (click)="toggle(false)" [ngClass]="!showAnswered ? 'selected' : ''">
+            <div class="col-3" (click)="toggle(true)" [ngClass]="showUnanswered ? 'selected' : ''">
                 <h4>Unanswered Questions</h4>
+            </div>
+            <div class="col-3" (click)="toggle(false)" [ngClass]="!showUnanswered ? 'selected' : ''">
+                <h4>Answered Questions</h4>
             </div>
         </div>
     </div>
-    <div class="col-6" *ngIf="showAnswered">
+    <div class="col-6" *ngIf="showUnanswered">
         <app-question-list
-            [questions]="answeredQuestion$ | async"
+            [questions]="unansweredQuestion$ | async"
             [users]="users$ | async"
             (onClicked)="onClicked($event)">
         </app-question-list>
     </div>
-    <div class="col-6" *ngIf="!showAnswered">
+    <div class="col-6" *ngIf="!showUnanswered">
         <app-question-list
-            [questions]="unansweredQuestion$ | async"
+            [questions]="answeredQuestion$ | async"
             [users]="users$ | async"
             (onClicked)="onClicked($event)">
         </app-question-list>
