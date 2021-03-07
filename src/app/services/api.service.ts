@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
-import { Question } from '../data.models/question.model';
+import { from, Observable } from 'rxjs';
+import { Question, SaveQuestionAnswer } from '../data.models/question.model';
 
 
 @Injectable({
@@ -144,11 +145,11 @@ export class ApiService {
     }
 
     private formatQuestion(question: any): Question {
-        const { author, optionOneText, optionTwoText } = question;
+        const { userId, optionOneText, optionTwoText } = question;
         return {
             id: this.generateUid(),
             timestamp: Date.now(),
-            author: author,
+            author: userId,
             optionOne: {
                 votes: [],
                 text: optionOneText,
@@ -162,9 +163,9 @@ export class ApiService {
 
     private _saveQuestion(question: any): Promise<Question> {
         return new Promise((res, rej) => {
-            const { author: authedUser } = question;
+            const { userId } = question;
             const formattedQuestion = this.formatQuestion(question);
-            const user = this.users[authedUser];
+            const user = this.users[userId];
 
             setTimeout(() => {
                 this.questions = {
@@ -174,7 +175,7 @@ export class ApiService {
 
                 this.users = {
                     ...this.users,
-                    [authedUser]: {
+                    [userId]: {
                         ...user,
                         questions: user.questions.concat([formattedQuestion.id])
                     }
@@ -185,39 +186,51 @@ export class ApiService {
         });
     }
 
-    private _saveQuestionAnswer(questionAnswer: any) {
+    private _saveQuestionAnswer(questionAnswer: any): Promise<SaveQuestionAnswer> {
         return new Promise((res, rej) => {
-            const { authedUser, qid, answer } = questionAnswer;
-            const user = this.users[authedUser];
+            const { userId, questionId, answer } = questionAnswer;
+            const user = this.users[userId];
 
             setTimeout(() => {
 
                 this.users = {
                     ...this.users,
-                    [authedUser]: {
+                    [userId]: {
                         ...user,
                         answers: {
                             ...user.answers,
-                            [qid]: answer
+                            [questionId]: answer
                         }
                     }
                 }
 
                 this.questions = {
                     ...this.questions,
-                    [qid]: {
-                        ...this.questions[qid],
+                    [questionId]: {
+                        ...this.questions[questionId],
                         [answer]: {
-                            ...this.questions[qid][answer],
-                            votes: this.questions[qid][answer].votes.concat([authedUser])
+                            ...this.questions[questionId][answer],
+                            votes: this.questions[questionId][answer].votes.concat([userId])
                         }
                     }
                 }
 
-                res('');
+                res({
+                    answer: answer,
+                    userId: userId,
+                    question:  {
+                        ...this.questions[questionId],
+                        [answer]: {
+                            ...this.questions[questionId][answer],
+                            votes: this.questions[questionId][answer].votes.concat([userId])
+                        }
+                    }
+                });
             }, 500)
         });
     }
+
+
 
     public getInitialData() {
         return Promise.all([
@@ -229,11 +242,11 @@ export class ApiService {
         }));
     }
 
-    public saveQuestion(question: any): Promise<Question> {
-        return this._saveQuestion(question);
+    public saveQuestion(question: any): Observable<Question> {
+        return from(this._saveQuestion(question));
     }
 
-    public saveQuestionAnswer(questionAnswer: any) {
-        return this._saveQuestionAnswer(questionAnswer);
+    public saveQuestionAnswer(questionAnswer: any): Observable<SaveQuestionAnswer> {
+        return from(this._saveQuestionAnswer(questionAnswer));
     }
 }

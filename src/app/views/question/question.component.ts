@@ -7,7 +7,7 @@ import { Question } from 'src/app/data.models/question.model';
 import { selectAuthedUser, } from 'src/app/state/selectors/authedUser.selectors';
 import { selectUserByQuestionId } from '../../state/selectors/users.selectors';
 import { ApiService } from '../../services/api.service';
-import { addQuestionAnswer } from '../../state/actions/questions.actions';
+import { addQuestionAnswer, saveQuestionAnswer } from '../../state/actions/questions.actions';
 import { addUserQuestionAnswer } from '../../state/actions/users.actions';
 import { Subscription } from 'rxjs';
 
@@ -69,28 +69,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
     public onClick(option: string) {
         const body = {
-            authedUser: this.authedUser.id as string,
-            qid: this.questionIdFromRoute,
-            answer: option
+            userId: this.authedUser.id || '',
+            questionId: this.questionIdFromRoute || '',
+            answer: option || ''
         };
 
-        this.apiService.saveQuestionAnswer({
-            authedUser: this.authedUser.id as string,
-            qid: this.questionIdFromRoute,
-            answer: option
-        }).then((res) => {
-            this.store.dispatch(addQuestionAnswer({
-                userId: this.authedUser.id,
-                questionId: this.questionIdFromRoute,
-                answerOption: option
-            }));
-            this.store.dispatch((addUserQuestionAnswer({
-                userId: this.authedUser.id,
-                questionId: this.questionIdFromRoute,
-                answerOption: option
-            })))
-        }).catch((apiError) => {
-
-        });
+        this.store.dispatch(saveQuestionAnswer({ ...body }));
     }
 }

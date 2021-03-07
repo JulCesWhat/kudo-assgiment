@@ -62,7 +62,8 @@ export class AppComponent implements OnInit, OnDestroy {
         modalRef.result
             .then(() => {
             })
-            .catch(() => {/* Do Nothing*/
+            .catch(() => {
+                /* Do Nothing*/
             });
     }
 }

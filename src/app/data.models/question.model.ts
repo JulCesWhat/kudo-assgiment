@@ -10,3 +10,9 @@ export interface Option {
     votes: string[];
     text: string;
 }
+
+export interface SaveQuestionAnswer {
+    question: Question,
+    userId: string,
+    answer: string
+}

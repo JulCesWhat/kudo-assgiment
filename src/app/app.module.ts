@@ -25,6 +25,7 @@ import { QuestionListComponent } from './views/dashboard/question-list/question-
 import { QuestionComponent } from './views/question/question.component';
 import { AddQuestionComponent } from './views/add-question/add-question.component';
 import { UserDetailsComponent } from './views/leaderboard/user-details/user-details.component';
+import { QuestionsEffects } from './state/effetcs/questions.effects';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import { UserDetailsComponent } from './views/leaderboard/user-details/user-deta
         BrowserModule,
         AppRoutingModule,
         StoreModule.forRoot({ users: usersReducer, questions: questionsReducer, authedUser: authedUserReducer }, {}),
+        EffectsModule.forRoot([QuestionsEffects]),
         NgbModule,
         FormsModule,
         ReactiveFormsModule

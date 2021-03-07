@@ -20,27 +20,13 @@ export const questionsReducer = createReducer(
             [questionId]: question
         };
     }),
-    on(addQuestionAnswer, (state, { questionId, userId, answerOption }) => {
-        const question = state[questionId] as Question;
-        let body = {};
-        if (answerOption === 'optionOne') {
-            body = {
-                ...question.optionOne,
-                votes: [...question.optionOne.votes, userId]
-            };
-        } else {
-            body = {
-                ...question.optionTwo,
-                votes: [...question.optionTwo.votes, userId]
-            }
-        }
+    on(addQuestionAnswer, (state, { userId, question }) => {
+        const questionId = question.id;
         return {
             ...state,
             [questionId]: {
                 ...state[questionId],
-                [answerOption]: {
-                    ...body
-                }
+                ...question
             }
         };
     })

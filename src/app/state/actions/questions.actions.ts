@@ -9,10 +9,20 @@ export const addQuestion = createAction(
 
 export const addQuestionAnswer = createAction(
     '[Questions Object] Add Question Answer',
-    props<{ questionId: string, userId: string, answerOption: string }>()
-)
+    props<{ userId: string, question: Question }>()
+);
 
 export const retrievedQuestionList = createAction(
     '[Questions Object/API] Retrieve Questions Success',
     props<{ questions: { [key: string]: Question } }>()
+);
+
+export const saveQuestion = createAction(
+    '[Questions Object] Save Question',
+    props<{ userId: string, optionOneText: string, optionTwoText: string }>()
+);
+
+export const saveQuestionAnswer = createAction(
+    '[Questions Object] Save Question Answer',
+    props<{ userId: string, questionId: string, answer: string }>()
 );

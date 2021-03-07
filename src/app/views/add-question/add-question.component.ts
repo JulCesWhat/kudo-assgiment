@@ -5,11 +5,12 @@ import { AppState } from '../../state/app.state';
 import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { selectAuthedUser } from 'src/app/state/selectors/authedUser.selectors';
-import { addQuestion } from 'src/app/state/actions/questions.actions';
+import { addQuestion, saveQuestion } from 'src/app/state/actions/questions.actions';
 import { Question } from 'src/app/data.models/question.model';
 import { User } from 'src/app/data.models/user.model';
 import { addUserQuestion } from 'src/app/state/actions/users.actions';
 import { Subscription } from 'rxjs';
+import { selectQuestions } from 'src/app/state/selectors/questions.selectors';
 
 @Component({
     selector: 'app-add-question',
@@ -49,21 +50,12 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
 
     public addNewQuestion() {
         const body = {
-            author: this.authedUser?.id,
-            optionOneText: this.newQuestionForm.get('q1')?.value,
-            optionTwoText: this.newQuestionForm.get('q2')?.value,
+            userId: this.authedUser?.id || '',
+            optionOneText: this.newQuestionForm.get('q1')?.value || '',
+            optionTwoText: this.newQuestionForm.get('q2')?.value || '',
         }
-        this.apiService.saveQuestion(body)
-            .then((question: Question) => {
-                this.store.dispatch(addQuestion({ question }));
-                this.store.dispatch(addUserQuestion({
-                    userId: this.authedUser?.id || '',
-                    questionId: question?.id
-                }));
-                this.router.navigate(['/home']);
-            }).catch((apiError) => {
 
-            });
+        this.store.dispatch(saveQuestion({ ...body }));
     }
 
 }

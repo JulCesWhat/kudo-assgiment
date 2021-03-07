@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AppState } from '../../state/app.state';
 import { selectAuthedUser } from '../../state/selectors/authedUser.selectors';
 import { Store, select } from '@ngrx/store';
-import { setAuthedUser } from 'src/app/state/actions/users.actions';
+import { resetAuthedUser } from 'src/app/state/actions/authedUser.actions';
 import { User } from 'src/app/data.models/user.model';
 import { Subscription } from 'rxjs';
 
@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     public logout() {
-        this.store.dispatch(setAuthedUser({ userId: '' }))
+        this.store.dispatch(resetAuthedUser());
     }
-
 }
