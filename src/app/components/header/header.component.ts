@@ -33,18 +33,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.authedUserSubscription?.unsubscribe();
     }
 
-    public goToHome() {
-        this.router.navigate(['/home']);
-    }
-
-    public goToLeaderboard() {
-        this.router.navigate(['/leaderboard']);
-    }
-
-    public goToAddQuestion() {
-        this.router.navigate(['/add']);
-    }
-
     public logout() {
         this.store.dispatch(resetAuthedUser());
     }

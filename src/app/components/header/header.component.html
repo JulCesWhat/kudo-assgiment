@@ -1,14 +1,14 @@
 <div class="row justify-content-between">
     <div class="col-4">
         <ul class="nav justify-content-start mb-5" *ngIf="authedUser">
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" (click)="goToHome()">Home</a>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/home">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" (click)="goToLeaderboard()">Leaderboard</a>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/leaderboard">Leaderboard</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" (click)="goToAddQuestion()">Add Question</a>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/add">Add Question</a>
             </li>
         </ul>
     </div>
@@ -16,6 +16,9 @@
         <ul class="nav justify-content-end mb-5" *ngIf="authedUser">
             <li class="nav-item">
                 <a class="nav-link disabled" href="javascript:void(0)">Hello {{authedUser.name}}!</a>
+            </li>
+            <li class="nav-item img-section">
+                <img [src]="authedUser?.avatarURL" [alt]="'Avatart of ' + authedUser?.name" className="avatar" />
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)" (click)="logout()">Logout</a>
