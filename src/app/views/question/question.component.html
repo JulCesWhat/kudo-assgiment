@@ -9,14 +9,14 @@
             </div>
             <div class="col-12 mt-3">
                 <div class="row justify-content-center">
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="answer-section py-2" [ngClass]="userResponse === 'optionOne' ? 'question-answer' : '' ">
                             <h5>{{question.optionOne.text}}</h5>
                             <div>{{(question.optionOne.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</div>
                             <div>{{question.optionOne.votes.length}} out of {{totalVotes}}</div>
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-4">
                         <div class="answer-section py-2" [ngClass]="userResponse === 'optionTwo' ? 'question-answer' : '' ">
                             <h5>{{question.optionTwo.text}}</h5>
                             <div>{{(question.optionTwo.votes.length / totalVotes * 100).toFixed(2) + ' %'}}</div>
@@ -33,13 +33,13 @@
             <div class="col-12 mt-3">
                 <img [src]="userCreator?.avatarURL" [alt]="'Avatart of ' + userCreator?.name" className="avatar" />
             </div>
-            <div class="col-6 mt-3">
-                <div class="row justify-content-center">
-                    <div class="col-3">
+            <div class="col-8 mt-3">
+                <div class="row justify-content-center question-section">
+                    <div class="col-5">
                         <button type="button" class="btn btn-primary"
                             (click)="onClick('optionOne')">{{question?.optionOne?.text}}</button>
                     </div>
-                    <div class="col-3">
+                    <div class="col-5">
                         <button type="button" class="btn btn-primary"
                             (click)="onClick('optionTwo')">{{question?.optionTwo?.text}}</button>
                     </div>
