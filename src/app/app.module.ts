@@ -20,7 +20,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
+import { AuthModalComponent } from './modals/auth-modal/auth-modal.component';
 import { QuestionListComponent } from './views/dashboard/question-list/question-list.component';
 import { QuestionComponent } from './views/question/question.component';
 import { AddQuestionComponent } from './views/add-question/add-question.component';

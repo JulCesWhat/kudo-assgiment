@@ -53,18 +53,3 @@ export const selectUnansweredQuestion = createSelector(
         }
     }
 );
-
-// export const selectAuthedUserQuestions = (id: string) => createSelector(
-//     (state: AppState) => state.authedUser,
-//     selectQuestionById(id),
-//     (authedUser: string, question: Question) => {
-//         // if (authedUser && Object.keys(questions).length) {
-//         //     return {
-//         //         authedUser,
-//         //         questions
-//         //     }
-//         // } else {
-//         //     return null;
-//         // }
-//     }
-// );

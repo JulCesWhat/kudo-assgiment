@@ -11,7 +11,7 @@ export const selectUsers = createSelector(
 
 export const selectUserByQuestionId = (id: string) => createSelector(
     selectUsers,
-    (allUsers) => {
+    (allUsers: { [key: string]: User }) => {
         if (allUsers) {
             const userId = Object.keys(allUsers).find((userId: string) => {
                 return allUsers[userId].questions.includes(id);

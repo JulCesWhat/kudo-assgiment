@@ -3,12 +3,10 @@ import { ApiService } from './services/api.service';
 import { Store, select } from '@ngrx/store';
 import { retrievedQuestionList } from './state/actions/questions.actions';
 import { retrievedUserList, setAuthedUser } from './state/actions/users.actions';
-import { selectQuestions } from './state/selectors/questions.selectors'
-import { selectUsers } from './state/selectors/users.selectors';
 import { selectAuthedUser } from './state/selectors/authedUser.selectors';
 import { AppState } from './state/app.state';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { AuthModalComponent } from './modals/auth.modal/auth.modal.component';
+import { AuthModalComponent } from './modals/auth-modal/auth-modal.component';
 import { Subscription } from 'rxjs';
 
 @Component({

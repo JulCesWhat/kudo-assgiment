@@ -1,14 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { AuthModalComponent } from './auth-modal.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthModalComponent } from './auth.modal.component';
-
-describe('Auth.ModalComponent', () => {
+describe('Auth-ModalComponent', () => {
     let component: AuthModalComponent;
     let fixture: ComponentFixture<AuthModalComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [AuthModalComponent]
+            imports: [
+                StoreModule.forRoot({})
+            ],
+            declarations: [AuthModalComponent],
+            providers: [
+                NgbActiveModal
+            ]
         })
             .compileComponents();
     });

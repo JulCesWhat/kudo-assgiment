@@ -9,7 +9,7 @@ export const selectQuestions = createSelector(
 
 export const selectQuestionById = (id: string) => createSelector(
     selectQuestions,
-    (allQuestions) => {
+    (allQuestions: { [key: string]: Question }) => {
         if (allQuestions) {
             const questionId = Object.keys(allQuestions).find((questionId: string) => (questionId === id));
             if (questionId) {
@@ -22,16 +22,3 @@ export const selectQuestionById = (id: string) => createSelector(
         }
     }
 );
-
-// export const selectCollectionState = createFeatureSelector<
-//     AppState,
-//     ReadonlyArray<String>
-// >("collection");
-
-// export const selectBookCollection = createSelector(
-//     selectQuestions,
-//     selectQuestionById(id),
-//     // (books: Array<Question>, collection: Array<string>) => {
-//     //     return collection.map((id) => books.find((book) => book.id === id));
-//     // }
-// );
