@@ -1,4 +1,4 @@
-# KudoAssgiment
+# KudoAssignment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
@@ -31,3 +31,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## View
 
 ![Home View](./home.png)
+
+## Live App
+
+[Assignment](https://kudo-project-f2bee.web.app)
