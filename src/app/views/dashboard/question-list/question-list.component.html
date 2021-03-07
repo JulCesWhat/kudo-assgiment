@@ -1,23 +1,32 @@
 <div class="row">
     <div class="col-12">
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let question of questions" (click)="questionClicked(question.id)">
-                <ng-container *ngIf="users">
+            <ng-container *ngIf="questions?.length; else no_questions">
+                <li class="list-group-item" *ngFor="let question of questions" (click)="questionClicked(question.id)">
+                    <ng-container *ngIf="users">
+                        <div class="row">
+                            <div class="col-2 img-section">
+                                <img [src]="users[question.author]?.avatarURL" alt="Avatart of {{users[question.author].name}}"
+                                className="avatar" />
+                            </div>
+                            <div class="col-8">
+                                <h5>{{users[question.author].name}}</h5>
+                                <p>Would you rather...</p>
+                            </div>
+                            <div class="col-2">
+                                <div>{{question.timestamp | date}}</div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </li>
+            </ng-container>
+            <ng-template #no_questions>
+                <li class="list-group-item">
                     <div class="row">
-                        <div class="col-2 img-section">
-                            <img [src]="users[question.author]?.avatarURL" alt="Avatart of {{users[question.author].name}}"
-                            className="avatar" />
-                        </div>
-                        <div class="col-8">
-                            <h5>{{users[question.author].name}}</h5>
-                            <p>Would you rather...</p>
-                        </div>
-                        <div class="col-2">
-                            <div>{{question.timestamp | date}}</div>
-                        </div>
+                        <a>There is no remaining questions in the list</a>
                     </div>
-                </ng-container>
-            </li>
+                </li>
+            </ng-template>
         </ul>
     </div>
 </div>
